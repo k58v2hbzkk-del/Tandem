@@ -5,7 +5,7 @@ keyInput.addEventListener('change', () => { try { localStorage.setItem('deskKey'
 
 const short = (a) => (a ? a.slice(0, 6) + '…' + a.slice(-4) : '—')
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])
-let explorer = 'https://testnet-explorer.hsk.xyz'
+let explorer = 'https://testnet-explorer.hskchain.net'
 
 async function api(path, body) {
   const r = await fetch(path, {
@@ -19,7 +19,7 @@ async function api(path, body) {
 }
 
 function render(s) {
-  explorer = s.chainId === 177 ? 'https://hashkey.blockscout.com' : 'https://testnet-explorer.hsk.xyz'
+  explorer = s.chainId === 177 ? 'https://hsk.blockscout.com' : 'https://testnet-explorer.hskchain.net'
   $('#meta').textContent = `HSP team "${s.team}" · ${s.chainId === 177 ? 'HSK mainnet' : 'HSK testnet'} · factory ${short(s.factory)}`
   $('#members').innerHTML = s.members
     .map((m) => `<li><span>${esc(m.name)} <small class="muted">${esc(m.does)}</small></span><span class="pct">${m.share / 100}%</span><a class="addr" href="${explorer}/address/${m.address}" target="_blank">${m.address}</a></li>`)

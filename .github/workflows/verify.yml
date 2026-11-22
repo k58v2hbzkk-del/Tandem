@@ -1,0 +1,23 @@
+name: verify
+# Verifies an already-deployed TandemFactory on the HashKey Chain explorer (Blockscout).
+on:
+  workflow_dispatch:
+    inputs:
+      network:
+        description: testnet or mainnet
+        required: true
+        default: testnet
+        type: choice
+        options: [testnet, mainnet]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+      - working-directory: contracts
+        run: |
+          forge install --no-git foundry-rs/forge-std@v1.9.4
+          if [ "${{ inputs.network }}" = mainnet ]; then CHAIN=177; EXP=https://hsk.blockscout.com; else CHAIN=133; EXP=https://testnet-explorer.hskchain.net; fi
+          ADDR=$(node -p "require('../deployments/${{ inputs.network }}.json').factory")
+          forge verify-contract $ADDR src/Tandem.sol:TandemFactory --chain-id $CHAIN --verifier blockscout --verifier-url $EXP/api/ --watch

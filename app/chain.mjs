@@ -12,14 +12,14 @@ export const hskTestnet = defineChain({
   name: 'HashKey Chain Testnet',
   nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
   rpcUrls: { default: { http: [process.env.HSK_TESTNET_RPC || 'https://testnet.hsk.xyz'] } },
-  blockExplorers: { default: { name: 'Explorer', url: 'https://testnet-explorer.hsk.xyz' } },
+  blockExplorers: { default: { name: 'Explorer', url: 'https://testnet-explorer.hskchain.net' } },
 })
 export const hskMainnet = defineChain({
   id: 177,
   name: 'HashKey Chain',
   nativeCurrency: { name: 'HSK', symbol: 'HSK', decimals: 18 },
   rpcUrls: { default: { http: [process.env.HSK_MAINNET_RPC || 'https://mainnet.hsk.xyz'] } },
-  blockExplorers: { default: { name: 'Explorer', url: 'https://hashkey.blockscout.com' } },
+  blockExplorers: { default: { name: 'Explorer', url: 'https://hsk.blockscout.com' } },
 })
 
 export const chainFor = (id) => (Number(id) === 177 ? hskMainnet : hskTestnet)
