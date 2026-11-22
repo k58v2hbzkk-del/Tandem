@@ -10,14 +10,14 @@ PAYER=$(cast wallet address --private-key $K1)
 pkill -f "anvil --port 8546" 2>/dev/null || true; pkill -f mock-hsp.mjs 2>/dev/null || true; pkill -f "app/server.mjs" 2>/dev/null || true
 anvil --port 8546 --chain-id 133 --silent & sleep 2
 RPC=http://127.0.0.1:8546
-FACTORY=$(cd contracts && forge create src/TeamSplit.sol:TeamSplitFactory --rpc-url $RPC --private-key $K0 --broadcast 2>/dev/null | grep "Deployed to" | awk '{print $3}')
+FACTORY=$(cd contracts && forge create src/Tandem.sol:TandemFactory --rpc-url $RPC --private-key $K0 --broadcast 2>/dev/null | grep "Deployed to" | awk '{print $3}')
 TOKEN=$(cd contracts && forge create test/mocks/MockUSDC.sol:MockUSDC --rpc-url $RPC --private-key $K0 --broadcast 2>/dev/null | grep "Deployed to" | awk '{print $3}')
 cast send $TOKEN "mint(address,uint256)" $PAYER 5000000 --rpc-url $RPC --private-key $K0 >/dev/null
 echo "factory $FACTORY token $TOKEN"
 RPC=$RPC TOKEN=$TOKEN GATEWAY_KEY=$K2 MOCK_PORT=7070 node test/mock-hsp.mjs >/tmp/mock.log 2>&1 &
 sleep 1
 rm -rf /tmp/ts-data
-HSK_TESTNET_RPC=$RPC HSP_MCP_URL=http://127.0.0.1:7070/ FACTORY=$FACTORY PAYER_KEY=$K1 RELAYER_KEY=$K0 ADMIN_TOKEN=secret HSP_TEAM_NAME=TeamSplit DATA_DIR=/tmp/ts-data PORT=3999 node app/server.mjs >/tmp/app.log 2>&1 &
+HSK_TESTNET_RPC=$RPC HSP_MCP_URL=http://127.0.0.1:7070/ FACTORY=$FACTORY PAYER_KEY=$K1 RELAYER_KEY=$K0 ADMIN_TOKEN=secret HSP_TEAM_NAME=Tandem DATA_DIR=/tmp/ts-data PORT=3999 node app/server.mjs >/tmp/app.log 2>&1 &
 sleep 2
 H='-H x-admin-token:secret -H content-type:application/json'
 JOB=$(curl -s $H -d '{"request":"Market brief on HSK","usd":1.5}' http://127.0.0.1:3999/api/jobs)

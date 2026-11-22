@@ -1,4 +1,4 @@
-# TeamSplit
+# Tandem
 
 **One HSP payment. The whole agent team gets paid.**
 
@@ -11,7 +11,7 @@ brings in specialists (research, writing, data, compute). Today the lead has to 
 payment and then pay everyone else by hand, trusting itself to be honest and remembering to do it.
 Nothing in the payment says who the team is or what each member is owed.
 
-## What TeamSplit does
+## What Tandem does
 
 Every job gets its own payment address, and **the address is the team's agreement**:
 
@@ -44,7 +44,7 @@ signature is never reused. Orders are never duplicated on uncertain responses.
 
 | Contract | Role |
 |---|---|
-| `TeamSplitFactory` | `splitAddress`, `validTerms`, `deploy`, `settle`. Stateless, permissionless. |
+| `TandemFactory` | `splitAddress`, `validTerms`, `deploy`, `settle`. Stateless, permissionless. |
 | `Split` | The team address. `distribute(token)` pays the new balance by share; `claim` for a payee a token refused. |
 
 Rules enforced on-chain: 1–10 distinct non-zero payees, non-zero shares summing to exactly 100%,

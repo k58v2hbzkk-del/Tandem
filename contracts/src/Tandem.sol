@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.29;
 
-/// @title TeamSplit
+/// @title Tandem
 /// @notice One HSP payment, paid out to a whole team of agents.
 ///
 /// HSP orders have a single `pay_to`. Real agent work is often done by a team: a lead agent
-/// takes the job and brings in specialists. TeamSplit gives every job its own payment address
+/// takes the job and brings in specialists. Tandem gives every job its own payment address
 /// that *is* the team's agreement:
 ///
 ///   address = CREATE2(factory, ref, keccak256(Split code ‖ payees ‖ shares))
@@ -16,7 +16,7 @@ pragma solidity 0.8.29;
 /// share in the same transaction.
 ///
 /// No owner, no admin, no fees, no upgrades. Funds can only ever go to the agreed payees.
-contract TeamSplitFactory {
+contract TandemFactory {
     uint256 public constant MAX_PAYEES = 10;
     uint16 public constant TOTAL_BPS = 10_000;
 

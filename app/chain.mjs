@@ -3,7 +3,7 @@ import { createPublicClient, createWalletClient, http, defineChain, encodeAbiPar
 import { privateKeyToAccount } from 'viem/accounts'
 import { readFileSync } from 'node:fs'
 
-const art = JSON.parse(readFileSync(new URL('./abi/TeamSplit.json', import.meta.url), 'utf8'))
+const art = JSON.parse(readFileSync(new URL('./abi/Tandem.json', import.meta.url), 'utf8'))
 export const factoryAbi = art.factoryAbi
 export const splitAbi = art.splitAbi
 
@@ -27,7 +27,7 @@ export const chainFor = (id) => (Number(id) === 177 ? hskMainnet : hskTestnet)
 /** Job reference → CREATE2 salt. */
 export const refOf = (orderId) => keccak256(toHex(orderId))
 
-/** The team's payment address, computed exactly as TeamSplitFactory.splitAddress does. */
+/** The team's payment address, computed exactly as TandemFactory.splitAddress does. */
 export function splitAddress(factory, payees, shares, ref) {
   const args = encodeAbiParameters([{ type: 'address[]' }, { type: 'uint16[]' }], [payees, shares.map(Number)])
   return getContractAddress({ opcode: 'CREATE2', from: factory, salt: ref, bytecode: concat([art.splitBytecode, args]) })

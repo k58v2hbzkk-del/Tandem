@@ -10,7 +10,7 @@ const ROLES = [
 
 /** Payee wallets: explicit env addresses, or derived from TEAM_SEED so they are recoverable. */
 export function team() {
-  const seed = process.env.TEAM_SEED || 'teamsplit-demo-seed'
+  const seed = process.env.TEAM_SEED || 'tandem-demo-seed'
   return ROLES.map((r) => {
     const env = process.env[`TEAM_${r.id.toUpperCase()}`]
     const address = env || privateKeyToAccount(keccak256(toHex(`${seed}:${r.id}`))).address

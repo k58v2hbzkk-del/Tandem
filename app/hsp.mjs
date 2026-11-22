@@ -23,7 +23,7 @@ export class Hsp {
 
   async connect() {
     if (this.client) return
-    const client = new Client({ name: 'teamsplit-agent', version: '0.1.0' })
+    const client = new Client({ name: 'tandem-agent', version: '0.1.0' })
     await client.connect(new StreamableHTTPClientTransport(new URL(this.url)))
     const { tools } = await client.listTools()
     // client-side prefixes can differ: match by suffix

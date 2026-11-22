@@ -2,7 +2,7 @@
 pragma solidity 0.8.29;
 
 import {Test} from "forge-std/Test.sol";
-import {TeamSplitFactory, Split} from "../src/TeamSplit.sol";
+import {TandemFactory, Split} from "../src/Tandem.sol";
 
 /// Standard token returning bool (USDC-style).
 contract Coin {
@@ -48,8 +48,8 @@ contract EvilCoin {
     }
 }
 
-contract TeamSplitTest is Test {
-    TeamSplitFactory f;
+contract TandemTest is Test {
+    TandemFactory f;
     Coin usdc;
     NoReturnCoin usdt;
 
@@ -59,7 +59,7 @@ contract TeamSplitTest is Test {
     bytes32 constant REF = keccak256("ORDER-001");
 
     function setUp() public {
-        f = new TeamSplitFactory();
+        f = new TandemFactory();
         usdc = new Coin();
         usdt = new NoReturnCoin();
     }
@@ -101,7 +101,7 @@ contract TeamSplitTest is Test {
     function test_rejectsBadTerms() public {
         (address[] memory p, uint16[] memory s) = team();
         s[2] = 1999; // sums to 9999
-        vm.expectRevert(TeamSplitFactory.BadTerms.selector);
+        vm.expectRevert(TandemFactory.BadTerms.selector);
         f.deploy(p, s, REF);
 
         (p, s) = team();

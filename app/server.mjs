@@ -11,7 +11,7 @@ fs.mkdirSync(DATA, { recursive: true })
 
 const cfg = {
   hspUrl: process.env.HSP_MCP_URL || 'https://mcp-qa.hashkeymerchant.com/',
-  team: process.env.HSP_TEAM_NAME || 'TeamSplit',
+  team: process.env.HSP_TEAM_NAME || 'Tandem',
   chainId: Number(process.env.CHAIN_ID || 133),
   coin: (process.env.PAY_COIN || 'USDC').toUpperCase(),
   factory: process.env.FACTORY,
@@ -130,4 +130,4 @@ const server = http.createServer(async (req, res) => {
   }
 })
 
-server.listen(Number(process.env.PORT || 3000), () => console.log(`TeamSplit on :${process.env.PORT || 3000} · chain ${cfg.chainId} · team "${cfg.team}"`))
+server.listen(Number(process.env.PORT || 3000), () => console.log(`Tandem on :${process.env.PORT || 3000} · chain ${cfg.chainId} · team "${cfg.team}"`))
