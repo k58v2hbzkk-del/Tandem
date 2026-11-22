@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TeamSplit · one HSP payment, paid out to a whole agent team</title>
+<meta name="description" content="Agent teams on HashKey Chain get paid through one HSP order. The payment address is the team's agreement.">
+<link rel="icon" href="/brand/favicon.svg">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="/"><img src="/brand/mark.svg" alt=""><span data-name>TeamSplit</span></a>
+  <nav><a href="#how">How it works</a><a href="#live">Live desk</a><a href="https://github.com/k58v2hbzkk-del" id="repo">Code</a></nav>
+</header>
+
+<section class="hero">
+  <p class="kicker">HSK Chain · HSP Agent Payments &amp; A2A Settlement</p>
+  <h1>One payment.<br><em>The whole team</em> gets paid.</h1>
+  <p class="lede">HSP orders pay one address. Real agent work is done by teams. <span data-name>TeamSplit</span> gives every job a payment address that <strong>is</strong> the team's agreement, then pays each agent its share the moment HSP settles.</p>
+  <div class="flow" aria-hidden="true">
+    <div class="node">Client agent</div><div class="wire"><span>HSP order</span></div>
+    <div class="node split">Split address<small>= team + shares</small></div><div class="wire fan"><span>settle</span></div>
+    <div class="fanout"><div class="node s">Lead 40%</div><div class="node s">Researcher 35%</div><div class="node s">Writer 25%</div></div>
+  </div>
+</section>
+
+<section id="how" class="how">
+  <article><b>01</b><h3>The address is the agreement</h3><p>The payment address is computed from the payees, the shares and the order. Change one share and it is a different address, so the paying agent can check the split before it pays and nobody can change it after.</p></article>
+  <article><b>02</b><h3>Paid through HSP, as specified</h3><p>The Lead agent opens the HSP order. The Client agent verifies the split on-chain, signs the Payment Mandate after your approval and submits it to HSP's Gateway after a second approval.</p></article>
+  <article><b>03</b><h3>Everyone paid in one transaction</h3><p>When HSP confirms, anyone can call <code>settle</code>. It deploys the split if needed and pays every agent its share. No owner, no fees, no way to send funds anywhere else.</p></article>
+</section>
+
+<section id="live" class="live">
+  <div class="live-head">
+    <h2>Live desk</h2>
+    <p class="muted" id="meta">Loading…</p>
+  </div>
+  <div class="grid">
+    <aside class="card team">
+      <h3>The team</h3>
+      <ul id="members"></ul>
+      <div class="adm">
+        <label>Desk key <input id="key" type="password" placeholder="only the operator has it"></label>
+        <form id="new">
+          <input id="req" maxlength="200" value="Market brief on HSK">
+          <input id="usd" type="number" step="0.01" min="0.1" max="50" value="1.00">
+          <button>Open a job</button>
+        </form>
+        <p class="note">Every signature and every submission waits for an explicit approval here.</p>
+      </div>
+    </aside>
+    <div id="jobs" class="jobs"></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <span data-name>TeamSplit</span> · built by <a href="https://x.com/Tajudeen">Tajudeen</a> for the HSK Chain Horizon Hackathon · Seoul
+</footer>
+<script src="/app.js"></script>
+</body>
+</html>

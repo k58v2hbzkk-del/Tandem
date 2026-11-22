@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: teamsplit
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: CHAIN_ID
+        value: "133"
+      - key: PAY_COIN
+        value: USDC
+      - key: HSP_MCP_URL
+        value: https://mcp-qa.hashkeymerchant.com/
+      - key: HSP_TEAM_NAME
+        sync: false
+      - key: FACTORY
+        sync: false
+      - key: PAYER_KEY
+        sync: false
+      - key: RELAYER_KEY
+        sync: false
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: TEAM_SEED
+        sync: false
